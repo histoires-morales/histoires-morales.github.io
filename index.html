@@ -10,17 +10,11 @@
 
   <!-- Bulma -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
-
-  <!-- Font Awesome (CDN, stable) -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Your CSS -->
   <link rel="stylesheet" href="static/css/index.css">
 
   <style>
-    /* ================= Title ================= */
-
     .main-title {
       font-family: 'Google Sans', 'Noto Sans', sans-serif;
       font-size: 3rem;
@@ -32,7 +26,6 @@
       margin-bottom: 1.8rem;
     }
 
-    /* French flag initials */
     .tricolor {
       display: inline-block;
       font-weight: 900;
@@ -52,7 +45,6 @@
       -webkit-text-stroke: 1px #111;
     }
 
-    /* Author links */
     .author-link {
       color: inherit;
       text-decoration: none;
@@ -61,7 +53,7 @@
       color: #222;
     }
 
-    /* Buttons */
+
     .symbol-links {
       margin-top: 1.4rem;
       margin-bottom: 1.4rem;
@@ -77,7 +69,6 @@
       vertical-align: middle;
     }
 
-    /* ================= Conference Tags ================= */
 
     .conference-banner {
       margin-top: 2rem;
@@ -115,14 +106,12 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
 
-          <!-- TITLE -->
+
           <h1 class="main-title">
             <span class="tricolor">H</span>istoires
             <span class="tricolor">M</span>orales:<br>
             A French Dataset for Assessing Moral Alignment
           </h1>
-
-          <!-- AUTHORS -->
           <div class="is-size-5 publication-authors">
             <a class="author-link" href="https://letenothibaud.github.io/" target="_blank">Thibaud Leteno</a><sup>1†*</sup>,
             <a class="author-link" href="https://www.iproskurina.com/" target="_blank">Irina Proskurina</a><sup>2†*</sup><br>
@@ -132,8 +121,6 @@
             <a class="author-link" href="https://guillaumemetzler.github.io/" target="_blank">Guillaume Metzler</a><sup>2</sup>,
             <a class="author-link" href="https://cgravier.fr/" target="_blank">Christophe Gravier</a><sup>1</sup>
           </div>
-
-          <!-- AFFILIATIONS -->
           <div class="is-size-6 publication-authors mt-3">
             <p><sup>1</sup>Laboratoire Hubert Curien, CNRS, Saint-Étienne, France</p>
             <p><sup>2</sup>Université Lumière Lyon 2 · Université Claude Bernard Lyon 1 · ERIC</p>
@@ -149,8 +136,6 @@
               </small>
             </p>
           </div>
-
-          <!-- LINKS -->
           <div class="symbol-links">
             <a href="https://aclanthology.org/2025.naacl-long.131/"
                class="button is-rounded is-dark">
@@ -189,7 +174,6 @@
             </a>
           </div>
 
-          <!-- CONFERENCE -->
           <div class="conference-banner">
   <a href="https://aclanthology.org/2025.naacl-long.131/"
      target="_blank"
@@ -218,63 +202,85 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Overview</h2>
 
-        <div class="content has-text-justified">
+<div class="content has-text-justified">
 
-          <p>
-            <strong>We introduce <em>HistoiresMorales</em></strong>, a French dataset built upon a corpus
-            of human-written moral stories in English called
-            <strong>MoralStories</strong>.
-          </p>
+  <p>
+    <strong>We introduce <em>HistoiresMorales</em></strong>, the first corpus for
+    <span class="fontGrad-bg">situated social reasoning in French</span>,
+    adapted from the English <strong><em>MoralStories</em></strong> dataset.
+    The dataset is designed to support the study of
+    <span class="fontGrad-bg">moral alignment of large language models</span>
+    in a multilingual setting.
+  </p>
 
-          <p>
-            <strong>Our <span class="fontGrad-bg">main contributions</span> are the following:</strong>
-          </p>
+  <p>
+    Our work is motivated by the question of whether
+    <span class="fontGrad-bg">the semantic space induced by different languages</span>
+    affects the moral alignment of LLMs, and by the lack of resources for
+    studying moral reasoning in French.
+  </p>
 
-          <ul>
-            <li>
-              We introduce <strong>HistoiresMorales</strong>, a first dataset of narratives
-              describing moral behaviour in French, which can be used alongside
-              <span class="fontGrad-bg">parallel English data</span> for comparative analysis.
-              We also explain the translation pipeline built using
-              <span class="fontGrad-bg">error-explanation prompts</span>,
-              manual annotations, and human feedback to achieve high-quality translations.
-            </li>
+  <p>
+    <strong>Our <span class="fontGrad-bg">main contributions</span> are the following:</strong>
+  </p>
 
-            <li>
-              We ensure the quality of texts in the <strong>HistoiresMorales</strong> dataset
-              and assess the alignment of the values it contains with those of
-              French human annotators.
-            </li>
+  <ul>
+    <li>
+      We introduce <strong><em>HistoiresMorales</em></strong>, a dataset of
+      <span class="fontGrad-bg">12,000 short narratives</span>
+      describing moral norms, situations, intentions, moral and immoral actions,
+      and their consequences in French.
+      The dataset remains
+      <span class="fontGrad-bg">parallel to its English counterpart</span>,
+      enabling controlled cross-lingual comparisons.
+    </li>
 
-            <li>
-              We compare LLMs’ moral alignment with human norms using
-              <span class="fontGrad-bg">sentence likelihood</span>
-              and declarative classification of moral actions.
-            </li>
+    <li>
+      We propose a
+      <span class="fontGrad-bg">multi-step translation pipeline</span>
+      based on error-explanation prompts, manual annotations,
+      and human feedback, designed to ensure grammatical fluency and
+      culturally appropriate translations.
+    </li>
 
-            <li>
-              We investigate the robustness of
-              <span class="fontGrad-bg">multilingual moral alignment</span>
-              by shifting model preferences toward moral or immoral actions
-              using <strong>Direct Preference Optimization</strong>.
-            </li>
-          </ul>
+    <li>
+      We assess the
+      <span class="fontGrad-bg">quality and cultural alignment</span>
+      of the dataset through validation by native French speakers,
+      showing that the norms and actions are generally aligned with
+      moral values commonly shared in France.
+    </li>
 
-          <p>
-            The first results show that LLMs align better with moral norms in
-            English than in French, with
-            <span class="fontGrad-bg">low robustness of this alignment</span>,
-            paving the way for further research.
-          </p>
-        </div>
+    <li>
+      We compare LLMs’ moral alignment with human norms using
+      <span class="fontGrad-bg">sentence likelihood</span>
+      and declarative classification of moral actions,
+      in both French and English.
+    </li>
+
+    <li>
+      Finally, we investigate the
+      <span class="fontGrad-bg">robustness of multilingual moral alignment</span>
+      by shifting model preferences toward moral or immoral actions
+      using <strong>Direct Preference Optimization</strong>.
+    </li>
+  </ul>
+
+  <p>
+    Our results show that LLMs tend to align more strongly with moral norms
+    in English than in French, and that this alignment exhibits
+    <span class="fontGrad-bg">low robustness</span>
+    under preference optimization,
+    highlighting the need for further research on multilingual moral alignment.
+  </p>
+
+</div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  /* ================= HistoiresMorales Dataset Section ================= */
-
   .dataset-box {
     background: #ffffff;
     border-radius: 14px;
@@ -428,7 +434,6 @@
         padding: 1.25rem;
       }
 
-      /* IMPORTANT: namespaced IDs to avoid collisions elsewhere on the page */
       #histoires-parallel-carousel #hm-s1:checked ~ .slides { transform: translateX(0%); }
       #histoires-parallel-carousel #hm-s2:checked ~ .slides { transform: translateX(-20%); }
       #histoires-parallel-carousel #hm-s3:checked ~ .slides { transform: translateX(-40%); }
@@ -623,8 +628,6 @@ html, body {
 
 
   <div class="slides">
-
-    <!-- 1) EDUCATION & LEARNING -->
     <div class="slide">
       <div class="example-card">
         <span class="topic-title"><span class="fontGrad-bg">Education </span></span>
@@ -669,8 +672,6 @@ html, body {
         </div>
       </div>
     </div>
-
-    <!-- 2) HEALTH & WELL-BEING -->
     <div class="slide">
       <div class="example-card">
         <span class="topic-title"><span class="fontGrad-bg">Health & Well-Being</span></span>
@@ -715,8 +716,6 @@ html, body {
         </div>
       </div>
     </div>
-
-    <!-- 3) LAW & CIVIC RESPONSIBILITY -->
     <div class="slide">
       <div class="example-card">
         <span class="topic-title"><span class="fontGrad-bg">Law & Civic Responsibility</span></span>
@@ -871,8 +870,6 @@ html, body {
   <button type="button" class="nav-btn next next-5" data-target="hm-s1">›</button>
 </div>
 
-
-  <!-- DOTS -->
   <div class="dots">
     <label for="hm-s1"></label>
     <label for="hm-s2"></label>
@@ -886,7 +883,6 @@ html, body {
   </div>
 </section>
 <style>
-  /* ===== Dataset Usage (Load Only) ===== */
   #dataset-usage {
     background: #f8fafc;
     padding: 3rem 1.5rem;
@@ -1246,7 +1242,6 @@ en = load_dataset("LabHC/moral_stories", split="train")
 
     </div>
 
-    <!-- ================= CODE (SAME STYLE AS DATASET USAGE) ================= -->
     <section id="dataset-usage">
       <div class="usage-box">
 
@@ -1293,7 +1288,6 @@ trainer.train()</code></pre>
       </div>
     </section>
 
-    <!-- ================= CLOSING TEXT ================= -->
     <div class="content has-text-justified mt-4">
       <p>
         Despite the very small training set,
