@@ -1244,39 +1244,55 @@ en = load_dataset("LabHC/moral_stories", split="train")
 
         <pre><code id="dpo-python-code"># !pip install -U trl unsloth datasets transformers
 
-import random, torch
-from datasets import load_dataset
-from trl import DPOTrainer, DPOConfig
-from unsloth import FastLanguageModel
+        from unsloth import FastLanguageModel
+        import random, torch
+        from datasets import load_dataset
+        from trl import DPOTrainer, DPOConfig
 
-random.seed(0)
-torch.manual_seed(0)
+        SEED = 42
+        random.seed(SEED)
+        torch.manual_seed(SEED)
 
-dataset = load_dataset("LabHC/histoires_morales", split="train")
+        dataset = load_dataset("LabHC/histoires_morales", split="train")
 
-dataset = dataset.map(lambda x: {
-    "prompt": f"{x['norm']} {x['situation']} {x['intention']}",
-    "chosen": x["moral_action"],
-    "rejected": x["immoral_action"],
-})
+        dataset = dataset.map(
+            lambda x: {
+                "prompt": f"{x['norm']} {x['situation']} {x['intention']}",
+                "chosen": x["moral_action"],
+                "rejected": x["immoral_action"],
+            },
+            remove_columns=dataset.column_names,
+        )
+        dataset = dataset.shuffle(seed=SEED).select(range(100))
 
-dataset = dataset.shuffle(seed=0).select(range(100))
+        model, tokenizer = FastLanguageModel.from_pretrained(
+            "mistralai/Mistral-7B-v0.1",
+            load_in_4bit=True,
+            max_seq_length=2048,
+        )
 
-model, tokenizer = FastLanguageModel.from_pretrained(
-    "mistralai/Mistral-7B-v0.1",
-    load_in_4bit=True,
-    max_seq_length=2048,
-)
+        model = FastLanguageModel.get_peft_model(
+            model,
+            r=16,
+            target_modules=[
+                "q_proj","k_proj","v_proj","o_proj",
+                "gate_proj","up_proj","down_proj",
+            ],
+            lora_alpha=16,
+            lora_dropout=0,
+            bias="none",
+            use_gradient_checkpointing="unsloth",
+        )
 
-trainer = DPOTrainer(
-    model=model,
-    ref_model=None,
-    args=DPOConfig(output_dir="./dpo", beta=0.1),
-    train_dataset=dataset,
-    tokenizer=tokenizer,
-)
+        trainer = DPOTrainer(
+            model=model,
+            ref_model=None,
+            args=DPOConfig(output_dir="./dpo", beta=0.1),
+            train_dataset=dataset,
+            processing_class=tokenizer,
+        )
 
-trainer.train()</code></pre>
+        trainer.train()</code></pre>
 
       </div>
     </section>
